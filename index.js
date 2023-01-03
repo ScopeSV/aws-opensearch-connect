@@ -26,6 +26,7 @@ const createAwsConnector = (credentials) => {
     };
 };
 
+// This function should be run on init and cached
 const getDomainEndpoint = async (domainName, region) => {
     const client = new OpenSearchClient({
         region: region,
@@ -37,7 +38,6 @@ const getDomainEndpoint = async (domainName, region) => {
     return `https://${response.DomainStatus.Endpoint}`;
 };
 
-// This function should be run on init and cached
 const getClient = async () => {
     const endpoint = await getDomainEndpoint(DOMAIN_NAME, REGION);
     const credentials = await defaultProvider()();
